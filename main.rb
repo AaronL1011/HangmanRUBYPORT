@@ -1,16 +1,11 @@
 # Requirements
-
-"""
-word to guess
-array for disguised word
-Current errors:
-Guesses left: 10
-
-"""
-
 require_relative "./draw.rb"
+require "tty-prompt"
+require "ascii-image"
 wordGuessList = File.readlines('guessingWords.txt')
 
+def titleScreen()
+end
 def gameMain(wordGuessList)
     #initialize the randomly selected word to guess
     wordToGuessSTRING = wordGuessList[rand(wordGuessList.length)].chomp
@@ -95,7 +90,23 @@ def drawScreen(errorCount, missedLetters, correctLetters)
     print(missedLetters)
     puts("\n")
 end
+def playerWin(correctWord)
+    puts "You win!"
+end
+def playerLose(correctWord)
+    puts "You suck!"
+end
+def ErrorHandle()
+end
 
-puts("Welcome to Hangman!")
-gameMain(wordGuessList)
-    
+
+prompt = TTY::Prompt.new
+menuChoice = prompt.select("What would you like to do?", ["Play Hangman", "Secret Surprise", "Quit"])
+if menuChoice == "Play Hangman"
+    puts("\n"*30)
+    gameMain(wordGuessList)
+elsif menuChoice == "Secret Surprise"
+    puts("\n"*30)
+    ascii = ASCII_Image.new("http://www.levihackwith.com/wp-content/uploads/2011/10/github-logo.png")
+    ascii.build(60)
+end

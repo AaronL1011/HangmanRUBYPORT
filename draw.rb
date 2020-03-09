@@ -111,27 +111,18 @@ def drawNone()
 end
 
 
-# import time
+def drawSurprise
+ puts"
 
-# print("\n"*30)
-# drawStart()
-# print("________________________________________")
-# print("Errors: L")
-# print("\n_ _ _ _ _ _ _")
-# time.sleep(2)
-# print("\n"*30)
-# drawTwo()
-# print("________________________________________")
-# print("Errors: L Y")
-# print("\n_ _ _ _ _ _ _")
-# time.sleep(2)
-# print("\n"*30)
-# drawThree()
-# print("________________________________________")
-# print("Errors: L Y M")
-# print("\n_ _ _ _ _ _ _")
-# time.sleep(2)
-# print("\n"*30)
-# drawEnd()
-# print("________________________________________")
-# print("\nYOU LOST, SUCKER!")
+              __        __        __        __
+ .*.        /~ .~\    /~  ~\    /~ .~\    /~  ~\
+ ***       '      `\/'      *  '      `\/'      *
+  V       (                .*)(               . *)
+/\|/\      \      Bruce . *./  \      Mike  . *./
+  |         `\ .      . .*/'    `\ .      . .*/'       .*.
+  |           `\ * .*. */' _    _ `\ * .*. */'         ***
+                `\ * */'  ( `\/'*)  `\ * */'          /\V
+                  `\/'     \   */'    `\/'              |/\
+                            `\/'                        |
+                            LOVES"
+end
