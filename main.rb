@@ -7,8 +7,7 @@ Current errors:
 Guesses left: 10
 
 """
-  
-require "active_support"
+
 require_relative "./draw.rb"
 wordGuessList = File.readlines('guessingWords.txt')
 
@@ -39,8 +38,12 @@ def gameMain(wordGuessList)
                     wordToGuess2[wordToGuess2.index(guess)] = "0"
                 end
             end
-        elsif correctLetters.include?(guess)
+        elsif correctLetters.include?(guess) || missedLetters.include?(guess)
             puts("You already guessed that!")
+        elsif guess == "" || guess == "\s"
+            puts("Please enter a guess!")
+        elsif guess.upcase == wordToGuessSTRING
+            break #break while loop when user guesses entire corrent word.
         else
             errorCount += 1
             missedLetters.push(guess)
