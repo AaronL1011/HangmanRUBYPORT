@@ -3,19 +3,22 @@ require_relative "./draw.rb"
 require_relative "./ErrorHandling.rb"
 require "tty-prompt"
 require 'random_word_generator'
-#pid = fork{ exec 'afplay', "./vampirekillerLong.mp3" }
+require 'colorize'
+require 'artii'
+require 'lolcat'
+#backgroundMusic = fork{ exec 'afplay', "./music/vampirekillerLong.mp3" }
 
 def titleScreen()
     puts `clear`
-    puts drawTitle()
+    puts drawTitle().colorize(:red)
     prompt = TTY::Prompt.new
     menuChoice = prompt.select("What would you like to do?", ["Play Hangman", "Secret Surprise", "Stop Music", "Quit"])
     if menuChoice == "Play Hangman"
         puts `clear`
         gameMain()
     elsif menuChoice == "Secret Surprise"
-        puts `clear`
-        puts "Dicks"
+        backgroundMusic = fork{exec 'killall', 'afplay'}
+        rickRoll = fork{ exec 'afplay', "./music/secret.mp3" }
     elsif menuChoice == "Stop Music"
         pid = fork{exec 'killall', 'afplay'}
         titleScreen()
@@ -32,6 +35,7 @@ def gameMain()
     wordToGuessSTRING = wordToGuessSTRING.upcase
     wordToGuess = wordToGuessSTRING.split("")
     wordToGuess2 = wordToGuessSTRING.split("")
+    puts drawHeader()
     puts("A word has been chosen...")
     puts("\n")
     #initialize variables requireda
@@ -75,6 +79,7 @@ end
 
 def drawScreen(errorCount, wrongLetters, correctLetters)
     puts `clear`
+    puts drawHeader()
     case errorCount
     when 0
         drawNone()
@@ -115,10 +120,12 @@ def playerWin(correctWord)
 end
 
 def playerLose(correctWord)
-    puts `cleabTTY::Screen.widthr`
+    puts `clear`
     drawEnd()
     print(correctWord.to_s+"\n\n")
     puts("Damn, you lost! Better luck next time.")
+    sleep(3)
+    titleScreen()
 end
 
 def ErrorHandle()
