@@ -65,16 +65,12 @@ def gameMain()
     end
 
     if errorCount != 10
-        puts `clear`
-        print(wordToGuess.to_s + "\n\n")
-        puts("CONGRATS! YOU WON!")
+        playerWin(wordToGuess)
     else
-        puts `clear`
-        drawEnd()
-        print(wordToGuess.to_s+"\n\n")
-        puts("Damn, you lost! Better luck next time.")
+        playerLose(wordToGuess)
     end
 end
+
 def drawScreen(errorCount, wrongLetters, correctLetters)
     puts `clear`
     case errorCount
@@ -107,12 +103,20 @@ def drawScreen(errorCount, wrongLetters, correctLetters)
     print(wrongLetters)
     puts("\n")
 end
+
 def playerWin(correctWord)
-    puts "You win!"
+    puts `clear`
+    print(correctWord.to_s + "\n\n")
+    puts("CONGRATS! YOU WON!")
 end
+
 def playerLose(correctWord)
-    puts "You suck!"
+    puts `clear`
+    drawEnd()
+    print(correctWord.to_s+"\n\n")
+    puts("Damn, you lost! Better luck next time.")
 end
+
 def ErrorHandle()
 end
 
