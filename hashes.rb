@@ -15,3 +15,8 @@ def testing(testword)
 end
 
 testing(testword)
+
+def gameReset()
+    guess = 100
+    
+end

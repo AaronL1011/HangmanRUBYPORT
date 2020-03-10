@@ -7,6 +7,7 @@ require 'random_word_generator'
 
 def titleScreen()
     puts `clear`
+    puts drawTitle()
     prompt = TTY::Prompt.new
     menuChoice = prompt.select("What would you like to do?", ["Play Hangman", "Secret Surprise", "Stop Music", "Quit"])
     if menuChoice == "Play Hangman"
@@ -25,7 +26,8 @@ end
 
 def gameMain()
     #initialize the randomly selected word to guess
-    wordToGuessSTRING = RandomWordGenerator.word
+    # wordToGuessSTRING = RandomWordGenerator.word
+    wordToGuessSTRING = "testing"
     # wordToGuessSTRING = "testing"
     wordToGuessSTRING = wordToGuessSTRING.upcase
     wordToGuess = wordToGuessSTRING.split("")
@@ -108,11 +110,12 @@ def playerWin(correctWord)
     puts `clear`
     print(correctWord.to_s + "\n\n")
     puts("CONGRATS! YOU WON!")
+    sleep(3)
     titleScreen()
 end
 
 def playerLose(correctWord)
-    puts `clear`
+    puts `cleabTTY::Screen.widthr`
     drawEnd()
     print(correctWord.to_s+"\n\n")
     puts("Damn, you lost! Better luck next time.")
