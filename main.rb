@@ -108,6 +108,7 @@ def playerWin(correctWord)
     puts `clear`
     print(correctWord.to_s + "\n\n")
     puts("CONGRATS! YOU WON!")
+    titleScreen()
 end
 
 def playerLose(correctWord)
