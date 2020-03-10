@@ -1,7 +1,7 @@
 # Requirements
 require_relative "./draw.rb"
+require_relative "./ErrorHandling.rb"
 require "tty-prompt"
-require "ascii-image"
 wordGuessList = File.readlines('guessingWords.txt')
 
 def titleScreen()
@@ -17,7 +17,7 @@ def gameMain(wordGuessList)
     puts("\n")
     #initialize variables requireda
     errorCount = 0
-    missedLetters = []
+    wongLetters = []
     correctLetters = ["_"] * (wordToGuess.length)
     #main game start
     print(correctLetters)
@@ -33,18 +33,18 @@ def gameMain(wordGuessList)
                     wordToGuess2[wordToGuess2.index(guess)] = "0"
                 end
             end
-        elsif correctLetters.include?(guess) || missedLetters.include?(guess)
-            puts("You already guessed that!")
+        elsif correctLetters.include?(guess) || wrongLetters.include?(guess)
+            alreadyGuessed(correctLetters, wrongLetters, guess)
         elsif guess == "" || guess == "\s"
             puts("Please enter a guess!")
         elsif guess.upcase == wordToGuessSTRING
             break #break while loop when user guesses entire corrent word.
         else
             errorCount += 1
-            missedLetters.push(guess)
+            wrongLetters.push(guess)
         end
         
-        drawScreen(errorCount, missedLetters, correctLetters)
+        drawScreen(errorCount, wrongLetters, correctLetters)
     end
 
     if errorCount != 10
@@ -58,7 +58,7 @@ def gameMain(wordGuessList)
         puts("Damn, you lost! Better luck next time.")
     end
 end
-def drawScreen(errorCount, missedLetters, correctLetters)
+def drawScreen(errorCount, wrongLetters, correctLetters)
     puts("\n"*30)
     case errorCount
     when 0
@@ -87,7 +87,7 @@ def drawScreen(errorCount, missedLetters, correctLetters)
     print(correctLetters)
     puts("\n"*2)
     puts("Missed Letters:")
-    print(missedLetters)
+    print(wrongLetters)
     puts("\n")
 end
 def playerWin(correctWord)
@@ -107,6 +107,5 @@ if menuChoice == "Play Hangman"
     gameMain(wordGuessList)
 elsif menuChoice == "Secret Surprise"
     puts("\n"*30)
-    ascii = ASCII_Image.new("http://www.levihackwith.com/wp-content/uploads/2011/10/github-logo.png")
-    ascii.build(60)
+    puts "Dicks"
 end
