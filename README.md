@@ -28,5 +28,6 @@ A large goal for this project is to take the CLI applications away from the trad
 
 Basically the entire premise of hangman is based around the selection of a random word. Originally I handled this as a .txt file that contained lines of english words that I inputed myself, the program would reference this file and choose a random word from the list. Thankfully someone has created a ruby gem called random-word-generator, which has the ability to generate strings of dictionary words, allowing for specification of the number of words, length of strings and the seperator. This seems like a much nicer, more integrated way to select words for the user to guess, whilst also restricting my ability as the creator of the project to know which words could be chosen.
 
-**Decoupled Code for Maintenance and Future Additions**
+**Sounds**
 
+A feature I think would be really cool to implement is the idea of sounds for the game, mainly background music and possibly some text-to-speech for extra immersion. The inbuilt method 'afplay' seems like an effective way to do this, allowing me to combine my ruby application with VLC and Google translate to enable the ability to process sounds through the terminal. Id like to include some 8-bit background music during the entire execution of the program (with the ability to mute), and have a text-to-speech process certain strings of text (eg. the title screen, win screens, loss screens, etc).
