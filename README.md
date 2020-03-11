@@ -3,11 +3,17 @@
 A ruby ported version of my Python Hangman.
 Done for a project for Coder Academy.
 
-### Instructions
+### Instructions and Help
 
 Ensure ruby is installed on your machine, and you have all the dependencies installed as listed below:
-`gem install tty`
-`gem install random-word-generator`
+```
+gem install tty
+gem install random-word-generator
+gem install colorize
+gem install lolcat
+gem install artii
+brew install mpg123
+```
 
 Navigate to directory of game in terminal and run with ruby.
 `ruby main.rb`
@@ -30,4 +36,11 @@ Basically the entire premise of hangman is based around the selection of a rando
 
 **Sounds**
 
-A feature I think would be really cool to implement is the idea of sounds for the game, mainly background music and possibly some text-to-speech for extra immersion. The inbuilt method 'afplay' seems like an effective way to do this, allowing me to combine my ruby application with VLC and Google translate to enable the ability to process sounds through the terminal. Id like to include some 8-bit background music during the entire execution of the program (with the ability to mute), and have a text-to-speech process certain strings of text (eg. the title screen, win screens, loss screens, etc).
+A feature I think would be really cool to implement is the idea of sounds for the game, mainly background music and possibly some text-to-speech for extra immersion. The inbuilt method 'afplay' seems like an effective way to do this, it is an inbuilt terminal based way to play audio clips. I can also use the 'tts' gem to integrate Google translate and enable the ability to use text-to-speech within the program. Id like to include some 8-bit background music within different screens (with the ability to mute), and have a text-to-speech process certain strings of text (eg. the title screen, win screens, loss screens, etc).
+
+## User Interaction
+
+## Control Flow
+
+## Implementation Plan
+

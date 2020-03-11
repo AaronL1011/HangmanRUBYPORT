@@ -1,33 +1,44 @@
 # Requirements
 require_relative "./draw.rb"
 require_relative "./ErrorHandling.rb"
-require "tty-prompt"
+require 'tty-prompt'
 require 'random_word_generator'
 require 'colorize'
 require 'artii'
 require 'lolcat'
-#backgroundMusic = fork{ exec 'afplay', "./music/vampirekillerLong.mp3" }
-
+require 'tts'
+require 'tty-spinner'
+windowSize = fork{ exec 'printf', "\e[8;24;105t"}
 def titleScreen()
+    titleMusic = fork{ exec 'afplay', "./music/title.mp3" }
     puts `clear`
     puts drawTitle().colorize(:red)
+
     prompt = TTY::Prompt.new
-    menuChoice = prompt.select("What would you like to do?", ["Play Hangman", "Secret Surprise", "Stop Music", "Quit"])
+    menuChoice = prompt.select("What would you like to do?", ["Play Hangman", "Credits", "Stop Music", "Quit"])
     if menuChoice == "Play Hangman"
         puts `clear`
+        stopMusic = fork{exec 'killall', 'afplay'}
+        spinner = TTY::Spinner.new("[:spinner] Loading ...", format: :dots)
+        spinner.auto_spin
+        sleep(2)
+        spinner.stop
+        puts `clear`
         gameMain()
-    elsif menuChoice == "Secret Surprise"
-        backgroundMusic = fork{exec 'killall', 'afplay'}
-        rickRoll = fork{ exec 'afplay', "./music/secret.mp3" }
+    elsif menuChoice == "Credits"
+        puts `clear`
+        credits()
     elsif menuChoice == "Stop Music"
-        pid = fork{exec 'killall', 'afplay'}
+        stopMusic = fork{exec 'killall', 'afplay'}
         titleScreen()
     elsif menuChoice == "Quit"
-        pid = fork{exec 'killall', 'afplay'}
+        stopMusic = fork{exec 'killall', 'afplay'}
+        exit!
     end
 end
 
 def gameMain()
+    gameMusic = fork{ exec 'afplay', "./music/vampirekillerLong.mp3" }
     #initialize the randomly selected word to guess
     # wordToGuessSTRING = RandomWordGenerator.word
     wordToGuessSTRING = "testing"
@@ -49,6 +60,10 @@ def gameMain()
         print("Enter a guess!: ")
         guess = gets.chomp
         guess = guess.upcase
+        if guess == "<MENU>"
+            stopMusic = fork{exec 'killall', 'afplay'}
+            titleScreen()
+        end
         if wordToGuess.include?(guess) &&  !correctLetters.include?(guess)
             for c in wordToGuess
                 if c == guess
@@ -113,9 +128,11 @@ end
 
 def playerWin(correctWord)
     puts `clear`
-    print(correctWord.to_s + "\n\n")
-    puts("CONGRATS! YOU WON!")
-    sleep(3)
+    backgroundMusic = fork{ exec 'killall', 'afplay'}
+    sleep(1)
+    victorySong = fork{ exec 'afplay', "./music/victory.mp3" }
+    drawVictory(correctWord)
+    sleep(5)
     titleScreen()
 end
 
@@ -124,11 +141,12 @@ def playerLose(correctWord)
     drawEnd()
     print(correctWord.to_s+"\n\n")
     puts("Damn, you lost! Better luck next time.")
-    sleep(3)
+    "You suck. You lost. Why dont you get a dictionary and try again.".play
+    sleep(5)
     titleScreen()
 end
 
-def ErrorHandle()
+def credits()
 end
 
 titleScreen()
