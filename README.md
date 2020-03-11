@@ -11,8 +11,6 @@ gem install tty
 gem install random-word-generator
 gem install colorize
 gem install lolcat
-gem install artii
-brew install mpg123
 ```
 
 Navigate to directory of game in terminal and run with ruby.

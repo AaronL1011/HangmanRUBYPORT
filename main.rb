@@ -4,12 +4,10 @@ require_relative "./ErrorHandling.rb"
 require 'tty-prompt'
 require 'random_word_generator'
 require 'colorize'
-require 'artii'
 require 'lolcat'
-require 'tts'
 require 'tty-spinner'
 $music = true
-windowSize = fork{ exec 'printf', "\e[8;24;105t"}
+windowSize = fork{ exec 'printf', "\e[8;27;105t"}
 
 def titleScreen()
     if $music
@@ -39,6 +37,7 @@ def titleScreen()
         titleScreen()
     elsif menuChoice == "Quit"
         cancelMusic()
+        puts `clear`
         exit!
     end
 end
@@ -48,8 +47,7 @@ def gameMain()
         gameMusic = fork{ exec 'afplay', "./music/vampirekillerLong.mp3" }
     end
     #initialize the randomly selected word to guess
-    # wordToGuessSTRING = RandomWordGenerator.word
-    wordToGuessSTRING = "testing"
+    wordToGuessSTRING = RandomWordGenerator.word
     # wordToGuessSTRING = "testing"
     wordToGuessSTRING = wordToGuessSTRING.upcase
     wordToGuess = wordToGuessSTRING.split("")
@@ -159,6 +157,14 @@ def playerLose(correctWord)
 end
 
 def credits()
+    puts "\n\n\n"
+    fork{exec 'lolcat -a -d 4 credits.plaintext'}
+
+    puts "\nPress enter to return."
+    gets
+    cancelMusic()
+    doSpinner()
+    titleScreen()
 end
 
 def doSpinner()
