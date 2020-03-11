@@ -8,37 +8,45 @@ require 'artii'
 require 'lolcat'
 require 'tts'
 require 'tty-spinner'
+$music = true
 windowSize = fork{ exec 'printf', "\e[8;24;105t"}
+
 def titleScreen()
-    titleMusic = fork{ exec 'afplay', "./music/title.mp3" }
+    if $music
+        titleMusic = fork{ exec 'afplay', "./music/title.mp3" }
+    end
     puts `clear`
     puts drawTitle().colorize(:red)
 
     prompt = TTY::Prompt.new
-    menuChoice = prompt.select("What would you like to do?", ["Play Hangman", "Credits", "Stop Music", "Quit"])
+    menuChoice = prompt.select("What would you like to do?", ["Play Hangman", "Credits", "Toggle Music", "Quit"])
     if menuChoice == "Play Hangman"
+        cancelMusic()
         puts `clear`
-        stopMusic = fork{exec 'killall', 'afplay'}
-        spinner = TTY::Spinner.new("[:spinner] Loading ...", format: :dots)
-        spinner.auto_spin
-        sleep(2)
-        spinner.stop
+        doSpinner()
         puts `clear`
         gameMain()
     elsif menuChoice == "Credits"
         puts `clear`
         credits()
-    elsif menuChoice == "Stop Music"
-        stopMusic = fork{exec 'killall', 'afplay'}
+    elsif menuChoice == "Toggle Music"
+        if $music
+            stopMusic = fork{exec 'killall', 'afplay'}
+            $music = false
+        elsif !$music
+            $music = true
+        end
         titleScreen()
     elsif menuChoice == "Quit"
-        stopMusic = fork{exec 'killall', 'afplay'}
+        cancelMusic()
         exit!
     end
 end
 
 def gameMain()
-    gameMusic = fork{ exec 'afplay', "./music/vampirekillerLong.mp3" }
+    if $music
+        gameMusic = fork{ exec 'afplay', "./music/vampirekillerLong.mp3" }
+    end
     #initialize the randomly selected word to guess
     # wordToGuessSTRING = RandomWordGenerator.word
     wordToGuessSTRING = "testing"
@@ -61,7 +69,7 @@ def gameMain()
         guess = gets.chomp
         guess = guess.upcase
         if guess == "<MENU>"
-            stopMusic = fork{exec 'killall', 'afplay'}
+            cancelMusic()
             titleScreen()
         end
         if wordToGuess.include?(guess) &&  !correctLetters.include?(guess)
@@ -127,26 +135,43 @@ def drawScreen(errorCount, wrongLetters, correctLetters)
 end
 
 def playerWin(correctWord)
+    cancelMusic()
     puts `clear`
-    backgroundMusic = fork{ exec 'killall', 'afplay'}
-    sleep(1)
-    victorySong = fork{ exec 'afplay', "./music/victory.mp3" }
+    doSpinner()
+    if $music
+        victorySong = fork{ exec 'afplay', "./music/victory.mp3" }
+    end
     drawVictory(correctWord)
     sleep(5)
     titleScreen()
 end
 
 def playerLose(correctWord)
+    cancelMusic()
     puts `clear`
-    drawEnd()
-    print(correctWord.to_s+"\n\n")
-    puts("Damn, you lost! Better luck next time.")
-    "You suck. You lost. Why dont you get a dictionary and try again.".play
+    doSpinner()
+    if $music
+        victorySong = fork{ exec 'afplay', "./music/gameover.mp3" }
+    end
+    drawLoser(correctWord)
     sleep(5)
     titleScreen()
 end
 
 def credits()
+end
+
+def doSpinner()
+    spinner = TTY::Spinner.new("[:spinner] Loading ...", format: :dots)
+    spinner.auto_spin
+    sleep(2)
+    spinner.stop
+end
+
+def cancelMusic()
+    if $music
+        stopMusic = fork{ exec 'killall', 'afplay'}
+    end
 end
 
 titleScreen()
