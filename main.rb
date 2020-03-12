@@ -60,9 +60,9 @@ def gameMain()
     correctLetters = ["_"] * (wordToGuessArray.length)
     #main game start
     print(correctLetters)
-    puts("\n")
+    puts("\n"*2)
     while correctLetters != wordToGuessArray && errorCount < 10
-        print("Enter a guess!: ")
+        print("Enter a guess! (single character or whole word): ")
         guess = gets.chomp
         guess = guess.upcase
         if guess == "<MENU>"
@@ -130,13 +130,14 @@ def drawScreen(errorCount, wrongLetters, correctLetters)
     puts("\n"*2)
     puts("Incorrect Guesses:")
     print(wrongLetters)
-    puts("\n")
+    puts("\n"*2)
 end
 
 def playerWin(correctWord)
     cancelMusic()
     puts `clear`
     doSpinner()
+    puts `clear`
     if $music
         victorySong = fork{ exec 'afplay', "./music/victory.mp3" }
     end
@@ -149,6 +150,7 @@ def playerLose(correctWord)
     cancelMusic()
     puts `clear`
     doSpinner()
+    puts `clear`
     if $music
         victorySong = fork{ exec 'afplay', "./music/gameover.mp3" }
     end

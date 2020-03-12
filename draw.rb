@@ -149,7 +149,7 @@ puts "
     .                      *                  `
             *        '             '                          .
 "
-print("              " + correctWord.to_s + "\n\n")
+print("         " + correctWord.to_s + "\n\n")
 end
 
 def drawLoser(correctWord)
