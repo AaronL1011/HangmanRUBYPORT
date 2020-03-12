@@ -1,6 +1,5 @@
 # Requirements
 require_relative "./draw.rb"
-require_relative "./ErrorHandling.rb"
 require 'tty-prompt'
 require 'random_word_generator'
 require 'colorize'
@@ -46,16 +45,16 @@ def gameMain()
     if $music
         gameMusic = fork{ exec 'afplay', "./music/vampirekillerLong.mp3" }
     end
+    puts drawHeader()
     #initialize the randomly selected word to guess
     wordToGuessSTRING = RandomWordGenerator.word
     # wordToGuessSTRING = "testing"
     wordToGuessSTRING = wordToGuessSTRING.upcase
     wordToGuess = wordToGuessSTRING.split("")
     wordToGuess2 = wordToGuessSTRING.split("")
-    puts drawHeader()
     puts("A word has been chosen...")
     puts("\n")
-    #initialize variables requireda
+    #initialize variables required
     errorCount = 0
     wrongLetters = []
     correctLetters = ["_"] * (wordToGuess.length)
@@ -127,7 +126,7 @@ def drawScreen(errorCount, wrongLetters, correctLetters)
     puts("Current Word:")
     print(correctLetters)
     puts("\n"*2)
-    puts("Missed Letters:")
+    puts("Incorrect Guesses:")
     print(wrongLetters)
     puts("\n")
 end

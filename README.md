@@ -34,11 +34,13 @@ Basically the entire premise of hangman is based around the selection of a rando
 
 **Sounds**
 
-A feature I think would be really cool to implement is the idea of sounds for the game, mainly background music and possibly some text-to-speech for extra immersion. The inbuilt method 'afplay' seems like an effective way to do this, it is an inbuilt terminal based way to play audio clips. I can also use the 'tts' gem to integrate Google translate and enable the ability to use text-to-speech within the program. Id like to include some 8-bit background music within different screens (with the ability to mute), and have a text-to-speech process certain strings of text (eg. the title screen, win screens, loss screens, etc).
+A feature I think would be really cool to implement is the idea of sounds for the game. This will include different pieces of retro game music for the title screen, during gameplay, and sound chimes when you win or lose. I think ill be able to accomplish this with the inbuilt fork/exec methods, which allow ruby programs to execute inbuilt terminal commands such as 'afplay' which is what will be playing the music for the game. I did a search for a gem to handle the sounds, but was unable to find one which was suitable, so 'afplay' will have to do for now.
 
 ## User Interaction
 
 ## Control Flow
+
+![Control Flow Diagram](/img/control_flow.jpg)
 
 ## Implementation Plan
 
