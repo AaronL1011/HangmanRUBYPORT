@@ -6,7 +6,7 @@ require 'colorize'
 require 'lolcat'
 require 'tty-spinner'
 $enableMusic = true
-windowSize = fork{ exec 'printf', "\e[8;27;105t"}
+windowSize = fork{ exec 'printf', "\e[8;27;105t"} # Resizing terminal window to best fit game.
 
 def titleScreen()
     if $enableMusic
