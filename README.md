@@ -1,7 +1,9 @@
 # HangmanRUBY
 
 A ruby ported version of my Python Hangman.
-Done for a project for Coder Academy.
+Done for a project with Coder Academy.
+
+Created by www.github.com/AaronL1011
 
 ### Instructions and Help
 
@@ -30,13 +32,13 @@ This application aims to provide an efficient, console based way to play everyon
 
 A large goal for this project is to take the CLI applications away from the traditional line by line text controlled programs. To do this, I plan to make an almost GUI/CLI hybrid, with appealing title screens, cursor selectable menu items and smooth transitions / overall polishing between each function of the game. In order to do this, I'm planning on utilizing the ruby gem TTY. This package includes many tools to allow me to create the user interface intended, such a combination of TTY-prompt and ASCII which will prove crucial to the generation of a visually appealing application. Between scenes ive added a loading screen with an animated spinning icon to smooth out the time needed for processing. Ive used some generic ascii along with the Colorize gem to create a pretty nice looking banner for the Title screen, along with some smaller ascii for titles during the game play. As for the win screen, I went with some cool ascii fireworks to celebrate the users victory. If they lose, well, I thought an ascii skull was appropriate seeings you just misspelled a man to death...
 
-![Title Screenshot](/img/menu_screenshot.png)
+![Title Screenshot](/docs/menu_screenshot.png)
 
 **Random Word Selection**
 
 Basically the entire premise of hangman is based around the selection of a random word. Originally I handled this as a .txt file that contained lines of english words that I inputed myself, the program would reference this file and choose a random word from the list. Thankfully someone has created a ruby gem called random-word-generator, which has the ability to generate strings of dictionary words, allowing for specification of the number of words, length of strings and the seperator. This seems like a much nicer, more integrated way to select words for the user to guess, whilst also restricting my ability as the creator of the project to know which words could be chosen. I created a variable name wordToGuess, and set it to be assigned to the RandomWordGenerator.word method, which works great. Unfortunetly some of the words that get selected are very difficult, but hey, its an excuse to expand your vocabulary I guess.
 
-![Random Word Generator Gem](/img/random-words.png)
+![Random Word Generator Gem](/docs/random-words.png)
 
 **Sounds**
 
@@ -46,23 +48,23 @@ A feature I think would be really cool to implement is the idea of sounds for th
 
 The controls of this program are very intuitive, enter letter or word, press return, so detailed instructions of how to play arent crucial, regardless, Ive made sure that the basics are included. On first execution, the TTY-prompt includes initial instructions about menu control (see below), which saves me some work and is quite tidy. 
 
-![Menu Prompt](/img/Menu_Prompt.png)
+![Menu Prompt](/docs/Menu_Prompt.png)
 
 As for the gameplay, once the game has begun, the program prints a line asking for user input, and stating valid input types (single characters or whole words). 
 
-![Guess Prompt](/img/Guess.png)
+![Guess Prompt](/docs/Guess.png)
 
 If a user enters a guess that has already been tried, the program will output the string "You've already tried that!" and prompt for another input. 
 
-![Menu Prompt](/img/already_guessed.png)
+![Menu Prompt](/docs/already_guessed.png)
 
 If the user inputs nothing, or a blank character, the program will ask for a valid input and wait for the next entry.
 
-![Menu Prompt](/img/enter_a_guess.png)
+![Menu Prompt](/docs/enter_a_guess.png)
 
 ## Control Flow
 
-![Control Flow Diagram](/img/control_flow.jpg)
+![Control Flow Diagram](/docs/control_flow.jpg)
 
 ## Implementation Plan
 
@@ -88,15 +90,15 @@ In order to complete this project by its due date on the 13th of May 2020, I nee
     1. Make it look cool.
 1. All the documentation
 
-![Project Board One](/img/Screenshot_1.png)
-![Project Board Two](/img/Screenshot_2.png)
-![Project Board Three](/img/Screenshot_3.png)
+![Project Board One](/docs/Screenshot_1.png)
+![Project Board Two](/docs/Screenshot_2.png)
+![Project Board Three](/docs/Screenshot_3.png)
 
 
 ## Testing
 
 Testing for this application was done manually by myself, classmates and my roommates. Results were recorded in a test case spreadsheet as below:
 
-![Test Case Spreadsheet](/img/testing.png)
+![Test Case Spreadsheet](/docs/testing.png)
 (All issues fixed in final presentation, left screenshot as is becasue all green tests is boring.)
 
