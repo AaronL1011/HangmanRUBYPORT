@@ -173,7 +173,7 @@ end
 def doSpinner()
     spinner = TTY::Spinner.new("[:spinner] Loading ...", format: :dots)
     spinner.auto_spin
-    sleep(2)
+    sleep(1)
     spinner.stop
 end
 
