@@ -14,7 +14,9 @@ gem install lolcat
 ```
 
 Navigate to directory of game in terminal and run with ruby.
-`ruby main.rb`
+```
+ruby main.rb
+```
 
 ## Software Development Plan
 
@@ -64,7 +66,7 @@ If the user inputs nothing, or a blank character, the program will ask for a val
 
 ## Implementation Plan
 
-In order to complete this project by its due date on the 13th of May 2020, I need to create a structure of all elements of the program and documentation to aid me in staying on track, and not forgetting features or testing. I have decided to use GitHubs built-in "Projects" feature to create a job board, where I am able to create tasks and sort them by TODO - In Progress and Done.  Main features to be developed include: 
+In order to complete this project by its due date on the 13th of May 2020, I need to create a structure of all elements of the program and documentation to aid me in staying on track, and not forgetting features or testing. I have decided to use GitHubs built-in "Projects" feature to create a job board, where I am able to create tasks and sort them by TODO, In Progress and Done.  Main features to be developed include: 
 
 1. Main Game Process (Winning and Losing)
     1. Using the random-word-generator gem to set a word to guess
