@@ -47,21 +47,21 @@ def gameMain()
     end
     puts drawHeader()
     #initialize the randomly selected word to guess
-    wordToGuessSTRING = RandomWordGenerator.word
-    # wordToGuessSTRING = "testing"
-    wordToGuessSTRING = wordToGuessSTRING.upcase
-    wordToGuess = wordToGuessSTRING.split("")
-    wordToGuess2 = wordToGuessSTRING.split("")
+    wordToGuess = RandomWordGenerator.word
+    # wordToGuess = "testing"
+    wordToGuess = wordToGuess.upcase
+    wordToGuessArray = wordToGuess.split("")
+    wordToGuessIndexReference = wordToGuess.split("")
     puts("A word has been chosen...")
     puts("\n")
     #initialize variables required
     errorCount = 0
     wrongLetters = []
-    correctLetters = ["_"] * (wordToGuess.length)
+    correctLetters = ["_"] * (wordToGuessArray.length)
     #main game start
     print(correctLetters)
     puts("\n")
-    while correctLetters != wordToGuess && errorCount < 10
+    while correctLetters != wordToGuessArray && errorCount < 10
         print("Enter a guess!: ")
         guess = gets.chomp
         guess = guess.upcase
@@ -69,31 +69,33 @@ def gameMain()
             cancelMusic()
             titleScreen()
         end
-        if wordToGuess.include?(guess) &&  !correctLetters.include?(guess)
-            for c in wordToGuess
+        if wordToGuessArray.include?(guess) &&  !correctLetters.include?(guess)
+            for c in wordToGuessArray
                 if c == guess
-                    correctLetters[wordToGuess2.index(guess)] = guess
-                    wordToGuess2[wordToGuess2.index(guess)] = "0"
+                    correctLetters[wordToGuessIndexReference.index(guess)] = guess
+                    wordToGuessIndexReference[wordToGuessIndexReference.index(guess)] = "0"
                 end
             end
+            drawScreen(errorCount, wrongLetters, correctLetters)
         elsif correctLetters.include?(guess) || wrongLetters.include?(guess)
-            alreadyGuessed(correctLetters, wrongLetters, guess)
+            drawScreen(errorCount, wrongLetters, correctLetters)
+            puts "You've already guessed that!"
         elsif guess == "" || guess == "\s"
+            drawScreen(errorCount, wrongLetters, correctLetters)
             puts("Please enter a guess!")
-        elsif guess.upcase == wordToGuessSTRING
+        elsif guess.upcase == wordToGuess
             break #break while loop when user guesses entire corrent word.
         else
             errorCount += 1
             wrongLetters.push(guess)
+            drawScreen(errorCount, wrongLetters, correctLetters)
         end
-        
-        drawScreen(errorCount, wrongLetters, correctLetters)
     end
 
     if errorCount != 10
-        playerWin(wordToGuess)
+        playerWin(wordToGuessArray)
     else
-        playerLose(wordToGuess)
+        playerLose(wordToGuessArray)
     end
 end
 
