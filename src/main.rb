@@ -45,8 +45,8 @@ def playGame()
         gameMusic = fork{ exec 'afplay', "./music/vampirekillerLong.mp3" }
     end
     puts drawHeader().colorize(:red)
-    wordToGuess = RandomWordGenerator.word # Assign random word from API to wordToGuess variable.
-    # wordToGuess = "testing"
+    # wordToGuess = RandomWordGenerator.word # Assign random word from API to wordToGuess variable.
+    wordToGuess = "testing"
     wordToGuess = wordToGuess.upcase #Initiate all the variables required for gameplay.
     wordToGuessArray = wordToGuess.split("")
     wordToGuessIndexReference = wordToGuess.split("")
